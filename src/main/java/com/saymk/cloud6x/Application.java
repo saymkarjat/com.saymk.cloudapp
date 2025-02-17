@@ -9,6 +9,5 @@ public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
-        int g =8;
-        int fg =8;
+
 }
