@@ -1,0 +1,73 @@
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+workspace.xml
+target/
+.gradle/
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
+
+# Logs
+logs/
+*.log
+**/logs/
+**/*.log
+
+# Maven & Gradle
+mvnw
+mvnw.cmd
+gradlew
+gradlew.bat
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
+
+# Temporary files
+*.swp
+*.swo
+*.bak
+*.tmp
+*.DS_Store
+*.class
+
+# Spring Boot specific
+*.war
+*.jar
+.env
+application.properties
+application.yml
+application-dev.properties
+application-prod.properties
+
+# Database files
+*.db
+*.sqlite
+*.h2.db
+*.mv.db
+*.pgdata
+HELP.md
+
+# Docker
+docker-compose.override.yml
+docker-compose.override.yaml
+.docker/
+docker-data/
+*.pid
+
+# Node.js (если фронтенд на React в том же репозитории)
+node_modules/
+npm-debug.log
+yarn-error.log
+.vite/
+dist/
+
+# Lombok cache
+.lombok/
+
+# IDE settings
+*.sw?
+*.sublime-workspace
+.vscode/
