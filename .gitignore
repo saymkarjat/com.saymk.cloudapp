@@ -22,9 +22,7 @@ mvnw.cmd
 gradlew
 gradlew.bat
 build/
-!gradle/wrapper/gradle-wrapper.jar
-!gradle/wrapper/gradle-wrapper.properties
-
+.mvn
 # Temporary files
 *.swp
 *.swo
@@ -41,6 +39,7 @@ application.properties
 application.yml
 application-dev.properties
 application-prod.properties
+.gitattributes
 
 # Database files
 *.db
