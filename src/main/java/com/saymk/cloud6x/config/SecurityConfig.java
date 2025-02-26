@@ -4,6 +4,7 @@ import com.saymk.cloud6x.security.JwtFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,6 +14,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity
@@ -30,13 +32,13 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/api/auth/sign-up",
                                 "/api/auth/sign-in",
-                                "/api/auth/sign-out",
                                 "/api/auth/refresh-token",
                                 "/", "/index.html", "/config.js", "/assets/**",
                                 "/login", "/registration", "/files/**"
                         ).permitAll()
                         .requestMatchers("/api/**").authenticated()
                 )
+                .exceptionHandling(e->e.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }

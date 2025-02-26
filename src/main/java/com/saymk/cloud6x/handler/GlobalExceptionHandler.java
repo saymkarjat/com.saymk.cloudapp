@@ -20,34 +20,34 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<?> handleBadCredentials(BadCredentialsException ex) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "Username or password invalid"));
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "Username or password invalid"));
     }
 
     @ExceptionHandler(UserAlreadyExistException.class)
     public ResponseEntity<?> handleConflict(UserAlreadyExistException ex) {
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("error", "Username already taken."));
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("message", "Username already taken."));
     }
 
     @ExceptionHandler(UsernameNotFoundException.class)
     public ResponseEntity<?> handleUserNotFound(UsernameNotFoundException ex) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "Username or password invalid"));
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "Username or password invalid"));
     }
 
     @ExceptionHandler(HandlerMethodValidationException.class)
     public ResponseEntity<?> handleConstraintViolationException(HandlerMethodValidationException ex) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", "Invalid request"));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", "Invalid request"));
     }
 
     @ExceptionHandler(MissingRequestCookieException.class)
     public ResponseEntity<?> handleMissingCookieException(MissingRequestCookieException ex) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "Missing refresh token"));
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "Missing refresh token"));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
         for (FieldError error : ex.getBindingResult().getFieldErrors()) {
-            errors.put("error", error.getDefaultMessage());
+            errors.put("message", error.getDefaultMessage());
         }
         return ResponseEntity.badRequest().body(errors);
     }
