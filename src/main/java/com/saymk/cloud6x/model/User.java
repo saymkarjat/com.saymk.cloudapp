@@ -2,11 +2,17 @@ package com.saymk.cloud6x.model;
 
 import com.saymk.cloud6x.security.Role;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "users")
 @Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,4 +27,5 @@ public class User {
     @Column(name = "role")
     @Enumerated(value = EnumType.STRING)
     private Role role;
+
 }
