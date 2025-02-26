@@ -1,5 +1,6 @@
-package com.saymk.cloud6x.security;
+package com.saymk.cloud6x.config;
 
+import com.saymk.cloud6x.security.JwtFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,11 +25,13 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(e -> e.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .anonymous(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/api/auth/sign-up",
                                 "/api/auth/sign-in",
-                                "/api/auth/refresh",
+                                "/api/auth/sign-out",
+                                "/api/auth/refresh-token",
                                 "/", "/index.html", "/config.js", "/assets/**",
                                 "/login", "/registration", "/files/**"
                         ).permitAll()
