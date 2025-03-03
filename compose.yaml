@@ -12,5 +12,19 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  minio:
+    container_name: minio
+    image: minio/minio:latest
+    command: server /data --console-address :9090
+    environment:
+      MINIO_ROOT_USER: user
+      MINIO_ROOT_PASSWORD: 12345678
+    volumes:
+      - minio-data:/data
+    ports:
+      - "9090:9090"
+      - "9000:9000"
+
 volumes:
   postgres_data:
+  minio-data:
