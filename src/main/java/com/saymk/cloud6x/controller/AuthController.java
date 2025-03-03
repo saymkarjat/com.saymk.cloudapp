@@ -7,18 +7,16 @@ import com.saymk.cloud6x.service.JwtService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -34,7 +32,7 @@ public class AuthController {
     @Value("${jwt.access_token_expiration_minutes}")
     private int accessTokenExpirationMinutes;
 
-    @PostMapping("/sign-up")
+    @PostMapping("sign-up")
     public ResponseEntity<?> registerUser(@Valid @RequestBody UserRequestDTO userRequestDTO, HttpServletResponse response) {
 
         authService.signUp(userRequestDTO);
@@ -47,7 +45,7 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.CREATED).body(responseBody);
     }
 
-    @PostMapping("/sign-in")
+    @PostMapping("sign-in")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody UserRequestDTO userRequestDTO, HttpServletResponse response) {
 
         AuthResponseDTO authData = authService.signIn(userRequestDTO);
