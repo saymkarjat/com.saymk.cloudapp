@@ -1,4 +1,4 @@
-package com.saymk.cloud6x.config;
+package com.saymk.cloud6x.minio.config;
 
 import io.minio.BucketExistsArgs;
 import io.minio.MakeBucketArgs;
