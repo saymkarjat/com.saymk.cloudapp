@@ -25,6 +25,30 @@ services:
       - "9090:9090"
       - "9000:9000"
 
+  mongo:
+    image: mongo:7.0.16-jammy
+    container_name: mongo-cloud
+    restart: on-failure
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: cloudstorage
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+
+    healthcheck:
+      test: echo 'db.runCommand({serverStatus:1}).ok' | mongosh admin -u $$MONGO_INITDB_ROOT_USERNAME -p $$MONGO_INITDB_ROOT_PASSWORD --quiet | grep 1
+      interval: 10s
+      timeout: 5s
+      start_period: 10s
+      retries: 5
+    depends_on:
+      - minio
+      - postgres
+
 volumes:
   postgres_data:
   minio-data:
+  mongo_data:
