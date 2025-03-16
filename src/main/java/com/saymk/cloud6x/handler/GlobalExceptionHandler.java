@@ -1,6 +1,7 @@
 package com.saymk.cloud6x.handler;
 
 import com.saymk.cloud6x.exception.UserAlreadyExistException;
+import com.saymk.cloud6x.minio.exception.FolderAlreadyExistException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -41,6 +42,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MissingRequestCookieException.class)
     public ResponseEntity<?> handleMissingCookieException(MissingRequestCookieException ex) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("message", "Missing refresh token"));
+    }
+
+    @ExceptionHandler(FolderAlreadyExistException.class)
+    public ResponseEntity<?> handleFolderAlreadyExistException(FolderAlreadyExistException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("message", "Folder already exist"));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
