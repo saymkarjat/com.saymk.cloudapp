@@ -1,0 +1,16 @@
+package com.saymk.cloud6x.minio.repository;
+
+import com.saymk.cloud6x.minio.model.MinioResource;
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+public interface MinioResourceRepository extends MongoRepository<MinioResource, String> {
+
+    Optional<MinioResource> findByFullPath(String fullPath);
+
+    List<MinioResource> findByPath(String path);
+
+}
