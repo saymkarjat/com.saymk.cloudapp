@@ -6,6 +6,7 @@ import com.saymk.cloud6x.minio.resolver.MinioServiceResolver;
 import com.saymk.cloud6x.minio.service.MinioFolderService;
 import com.saymk.cloud6x.minio.service.MinioService;
 import com.saymk.cloud6x.minio.service.StorageService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/directory")
 @RequiredArgsConstructor
+@Tag(name = "Directory API", description = "Управление директориями в хранилище")
 public class DirectoryController {
 
     private final StorageService storageService;

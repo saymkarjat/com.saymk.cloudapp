@@ -4,6 +4,7 @@ import com.saymk.cloud6x.dto.AuthResponseDTO;
 import com.saymk.cloud6x.dto.UserRequestDTO;
 import com.saymk.cloud6x.service.AuthService;
 import com.saymk.cloud6x.service.JwtService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -23,6 +24,7 @@ import java.util.concurrent.TimeUnit;
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
+@Tag(name = "Authentication API", description = "Регистрация и авторизация с помощью JWT токена")
 public class AuthController {
     private final AuthService authService;
     private final JwtService jwtService;

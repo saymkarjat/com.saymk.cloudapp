@@ -37,6 +37,7 @@ public class AuthService {
                 .username(userRequestDTO.username())
                 .password(passwordEncoder.encode(userRequestDTO.password()))
                 .role(Role.USER)
+                .storageSize(0L)
                 .build();
         try {
             userRepository.save(user);
