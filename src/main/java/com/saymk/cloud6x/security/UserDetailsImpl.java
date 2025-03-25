@@ -10,7 +10,12 @@ import java.util.Collection;
 import java.util.List;
 @AllArgsConstructor
 public class UserDetailsImpl implements UserDetails {
+
     private final User user;
+
+    public User getUser() {
+        return user;
+    }
 
     public Long getId() {
         return user.getId();
