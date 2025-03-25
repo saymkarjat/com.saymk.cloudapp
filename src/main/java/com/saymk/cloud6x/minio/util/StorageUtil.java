@@ -14,4 +14,22 @@ public class StorageUtil {
         String cleanedPath = StringUtils.removeEnd(path, "/");
         return FilenameUtils.getFullPath(cleanedPath);
     }
+
+    public static String getFileName(String path) {
+        return FilenameUtils.getName(path);
+    }
+
+    public static String getFilePathWithoutName(String path) {
+        return FilenameUtils.getFullPath(path);
+    }
+
+    public static String deleteInitialPrefix(String path) {
+        String[] parts = path.split("/", 2);
+        if (parts.length > 1) {
+            path = parts[1];
+        } else {
+            path = "";
+        }
+        return path;
+    }
 }
