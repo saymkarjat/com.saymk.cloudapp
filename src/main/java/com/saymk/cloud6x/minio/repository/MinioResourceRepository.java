@@ -13,4 +13,12 @@ public interface MinioResourceRepository extends MongoRepository<MinioResource, 
 
     List<MinioResource> findByPath(String path);
 
+    long deleteByFullPathIgnoreCase(String fullPath);
+
+    long deleteByPathIgnoreCase(String path);
+
+    List<MinioResource> findByNameIgnoreCase(String name);
+
+    List<MinioResource> findByNameAndUserId(String name, Long userId);
+
 }
