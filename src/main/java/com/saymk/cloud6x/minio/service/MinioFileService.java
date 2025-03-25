@@ -1,13 +1,17 @@
 package com.saymk.cloud6x.minio.service;
 
-import com.saymk.cloud6x.minio.dto.ResourceInfoResponseDTO;
-import io.minio.MinioClient;
-import io.minio.StatObjectArgs;
+import com.saymk.cloud6x.minio.exception.FileAlreadyExistException;
+import io.minio.*;
 import io.minio.errors.ErrorResponseException;
+import lombok.Cleanup;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+
 @Component
 @Slf4j
 public class MinioFileService extends MinioService {
@@ -16,25 +20,40 @@ public class MinioFileService extends MinioService {
         super(minioClient);
     }
 
-
     @Override
-    public ResourceInfoResponseDTO objectStats(String fullPath) {
-        return null;
-    }
-
-    @Override
+    @SneakyThrows
     public void deleteObjectByPath(String path) {
-
+        minioClient.removeObject(RemoveObjectArgs
+                .builder()
+                .bucket(bucketName)
+                .object(path)
+                .build());
     }
 
     @Override
+    @SneakyThrows
     public void copyObject(String sourcePath, String targetPath) {
-
+        if (objectExists(targetPath)) {
+            throw new FileAlreadyExistException();
+        }
+        minioClient.copyObject(
+                CopyObjectArgs.builder()
+                        .bucket(bucketName)
+                        .object(targetPath)
+                        .source(
+                                CopySource.builder()
+                                        .bucket(bucketName)
+                                        .object(sourcePath)
+                                        .build()
+                        )
+                        .build()
+        );
     }
 
     @Override
-    public InputStream readObject(String folderPath) {
-        return null;
+    @SneakyThrows
+    public InputStream getResourceStream(String path) {
+        return getFileStream(path);
     }
 
     @Override
