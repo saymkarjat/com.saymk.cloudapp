@@ -28,4 +28,7 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
+    @Column(name = "storage_size")
+    private Long storageSize;
+
 }
