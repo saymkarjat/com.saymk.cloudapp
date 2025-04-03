@@ -67,7 +67,9 @@ public class SecurityConfig {
 
         configuration.setAllowedOrigins(List.of(
                 "http://localhost",
-                "http://localhost:5173"
+                "http://localhost:5173",
+                "http://cloud-frontend",
+                "*"
         ));
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
