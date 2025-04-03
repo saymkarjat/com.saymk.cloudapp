@@ -1,0 +1,55 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongo-cloud-prod:27017/cloudstorage
+
+  application:
+    name: cloudstorage
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        hbm2ddl:
+          auto: validate
+    show-sql: false
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://cloud-postgres-prod:5432/${POSTGRES_DB}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+
+  liquibase:
+    enabled: true
+    change-log: db/changelog/db.changelog-master.yaml
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+  task:
+    execution:
+      pool:
+        core-size: 10
+        max-size: 50
+        queue-capacity: 100
+
+jwt:
+  secret: ${JWT_SECRET}
+  access_token_expiration_minutes: ${ACCESS_TOKEN_EXPIRATION}
+  refresh_token_expiration_days: ${REFRESH_TOKEN_EXPIRATION}
+
+minio:
+  bucket-name: ${MINIO_BUCKET_NAME}
+  endpoint: http://minio-prod:9000
+  user: ${MINIO_ROOT_USER}
+  password: ${MINIO_ROOT_PASSWORD}
+  max_mb_capacity_for_user: ${MAX_MB_CAPACITY_FOR_USER}
+
+server:
+  port: 8080
+  tomcat:
+    uri-encoding: UTF-8
