@@ -15,4 +15,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Modifying
     @Query("UPDATE User u SET u.storageSize = u.storageSize + :size WHERE u.id = :userId AND u.storageSize + :size <= :maxCapacity")
     int increaseStorageSize(@Param("userId") Long userId, @Param("size") Long size, @Param("maxCapacity") Long maxCapacity);
+
+    boolean existsByUsername(String username);
 }
