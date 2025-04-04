@@ -69,7 +69,7 @@ public class SecurityConfig {
                 "http://localhost",
                 "http://localhost:5173",
                 "http://cloud-frontend",
-                "*"
+                "http://81.94.156.60"
         ));
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
