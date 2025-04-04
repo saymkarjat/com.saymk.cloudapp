@@ -1,7 +1,7 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongo-cloud-prod:27017/cloudstorage
+      uri: mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongo:27017/cloudstorage
 
   application:
     name: cloudstorage
