@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
-import java.io.OutputStream;
 
 @RequiredArgsConstructor
 public abstract class MinioService {
@@ -41,8 +40,6 @@ public abstract class MinioService {
                         .build()
         );
     }
-
-
 
 
     public abstract void deleteObjectByPath(String path);

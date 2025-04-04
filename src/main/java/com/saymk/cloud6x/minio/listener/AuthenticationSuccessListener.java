@@ -1,7 +1,6 @@
 package com.saymk.cloud6x.minio.listener;
 
 import com.saymk.cloud6x.minio.exception.FolderAlreadyExistException;
-import com.saymk.cloud6x.minio.service.MinioFolderService;
 import com.saymk.cloud6x.minio.service.StorageService;
 import com.saymk.cloud6x.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;

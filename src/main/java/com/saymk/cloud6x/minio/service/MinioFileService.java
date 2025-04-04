@@ -3,14 +3,11 @@ package com.saymk.cloud6x.minio.service;
 import com.saymk.cloud6x.minio.exception.FileAlreadyExistException;
 import io.minio.*;
 import io.minio.errors.ErrorResponseException;
-import lombok.Cleanup;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 
 @Component
 @Slf4j

@@ -30,7 +30,7 @@ public class ResourceController {
 
     @DeleteMapping
     public ResponseEntity<?> deleteResources(@RequestParam(name = "path") String path,
-                                            @AuthenticationPrincipal(expression = "id") Long userId) {
+                                             @AuthenticationPrincipal(expression = "id") Long userId) {
         storageService.deleteResource(path, userId);
         return ResponseEntity.noContent().build();
     }
@@ -62,7 +62,7 @@ public class ResourceController {
 
     @GetMapping("/search")
     public ResponseEntity<?> searchResources(@RequestParam(name = "query") String query,
-                                                                 @AuthenticationPrincipal(expression = "id") Long userId) {
+                                             @AuthenticationPrincipal(expression = "id") Long userId) {
         return ResponseEntity.ok().body(storageService.findResourcesByName(query, userId));
     }
 

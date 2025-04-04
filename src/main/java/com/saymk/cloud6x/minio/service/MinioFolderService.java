@@ -5,9 +5,6 @@ import com.saymk.cloud6x.minio.util.StorageUtil;
 import io.minio.*;
 import io.minio.messages.DeleteObject;
 import io.minio.messages.Item;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -15,7 +12,6 @@ import org.springframework.stereotype.Component;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipEntry;
@@ -24,7 +20,7 @@ import java.util.zip.ZipOutputStream;
 @Component
 @Slf4j
 
-public class MinioFolderService extends MinioService{
+public class MinioFolderService extends MinioService {
     private static final InputStream EMPTY_BYTE_STREAM = new ByteArrayInputStream(new byte[0]);
 
 
@@ -73,7 +69,7 @@ public class MinioFolderService extends MinioService{
                 .recursive(true)
                 .build());
 
-        results.forEach(e-> {
+        results.forEach(e -> {
             try {
                 items.add(e.get());
             } catch (Exception ex) {

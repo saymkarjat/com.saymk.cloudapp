@@ -6,8 +6,6 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.lang.Nullable;
 
-import java.util.UUID;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

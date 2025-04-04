@@ -1,10 +1,10 @@
 package com.saymk.cloud6x.minio.service;
 
-import com.saymk.cloud6x.minio.exception.StorageLimitExceededException;
 import com.saymk.cloud6x.minio.dto.ResourceInfoResponseDTO;
 import com.saymk.cloud6x.minio.dto.mapper.MinioResourceMapper;
 import com.saymk.cloud6x.minio.exception.FolderAlreadyExistException;
 import com.saymk.cloud6x.minio.exception.ResourceNotFoundException;
+import com.saymk.cloud6x.minio.exception.StorageLimitExceededException;
 import com.saymk.cloud6x.minio.model.MinioResource;
 import com.saymk.cloud6x.minio.model.ResourceType;
 import com.saymk.cloud6x.minio.repository.MinioResourceRepository;
@@ -20,7 +20,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -106,9 +105,9 @@ public class StorageService {
     }
 
     public InputStream downloadResource(String path, Long userId) {
-        String root = "user-"+userId+"-files/";
+        String root = "user-" + userId + "-files/";
         MinioService service = serviceResolver.resolve(path);
-        String fullPath = root+path;
+        String fullPath = root + path;
         return service.getResourceStream(fullPath);
     }
 
@@ -125,7 +124,7 @@ public class StorageService {
             throw new StorageLimitExceededException();
         }
 
-        String sourceFolder = "user-"+user.getId()+"-files/" + path;
+        String sourceFolder = "user-" + user.getId() + "-files/" + path;
         List<MinioResource> list = new ArrayList<>();
         for (MultipartFile file : files) {
             String fullPath = sourceFolder + file.getOriginalFilename();
@@ -149,7 +148,7 @@ public class StorageService {
     }
 
     public ResourceInfoResponseDTO getResourceInfo(String path, Long id) {
-        String root = "user-"+id+"-files/";
+        String root = "user-" + id + "-files/";
         Optional<MinioResource> minioResource = repository.findByFullPath(root + path);
         if (minioResource.isEmpty()) {
             throw new ResourceNotFoundException();
@@ -158,23 +157,23 @@ public class StorageService {
     }
 
     public void deleteResource(String path, Long id) {
-        String root = "user-"+id+"-files/";
+        String root = "user-" + id + "-files/";
         MinioService service = serviceResolver.resolve(path);
-        if (!service.objectExists(root+path)) {
+        if (!service.objectExists(root + path)) {
             throw new ResourceNotFoundException();
         }
-        service.deleteObjectByPath(root+path);
+        service.deleteObjectByPath(root + path);
         if (path.endsWith("/")) {
-            repository.deleteByFullPathIgnoreCase(root+path);
-            repository.deleteByPathIgnoreCase(root+path);
+            repository.deleteByFullPathIgnoreCase(root + path);
+            repository.deleteByPathIgnoreCase(root + path);
             return;
         }
-        repository.deleteByFullPathIgnoreCase(root+path);
+        repository.deleteByFullPathIgnoreCase(root + path);
     }
 
     public void createInitialFolderForNewUser(Long id) {
-        String path = "user-"+id+"-files/";
-        if (folderService.objectExists(path)){
+        String path = "user-" + id + "-files/";
+        if (folderService.objectExists(path)) {
             log.info("Папка уже существует: {}", path);
             throw new FolderAlreadyExistException();
         }
@@ -191,7 +190,7 @@ public class StorageService {
     }
 
     public ResourceInfoResponseDTO createFolder(String path, Long id) {
-        String fullPath = "user-"+id+"-files/" + path;
+        String fullPath = "user-" + id + "-files/" + path;
         String name = StorageUtil.getFolderName(fullPath);
         String folderPathWithoutName = StorageUtil.getFolderPathWithoutName(fullPath);
 
@@ -210,7 +209,7 @@ public class StorageService {
     }
 
     public List<ResourceInfoResponseDTO> getFolderContents(String path, Long id) {
-        String fullPath = "user-"+id+"-files/" + path;
+        String fullPath = "user-" + id + "-files/" + path;
         List<MinioResource> resources = repository.findByPath(fullPath);
         return mapper.toDtoList(resources);
     }

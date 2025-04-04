@@ -26,11 +26,11 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 @Tag(name = "Authentication API", description = "Регистрация и авторизация с помощью JWT токена")
 public class AuthController {
+    private static final String cookieKeyForAccessToken = "access_token";
+    private static final String cookieKeyForRefreshToken = "refresh_token";
     private final AuthService authService;
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
-    private static final String cookieKeyForAccessToken = "access_token";
-    private static final String cookieKeyForRefreshToken = "refresh_token";
     @Value("${jwt.access_token_expiration_minutes}")
     private int accessTokenExpirationMinutes;
 

@@ -32,8 +32,8 @@ public class MinioResourceMapper {
         return path;
     }
 
-    private String getRootDirectory(Long id){
-        return "user-"+id+"-files/";
+    private String getRootDirectory(Long id) {
+        return "user-" + id + "-files/";
     }
 }
 
