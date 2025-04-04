@@ -76,5 +76,9 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(errors);
     }
 
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<?> handleMissingServletRequestParameterException(Exception ex) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("message", "Неизвестная ошибка"));
+    }
 
 }
