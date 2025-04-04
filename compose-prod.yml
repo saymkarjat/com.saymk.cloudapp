@@ -45,6 +45,7 @@ services:
       - "27017:27017"
     volumes:
       - mongo_data:/data/db
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
     networks:
       - shared-network
     environment:
